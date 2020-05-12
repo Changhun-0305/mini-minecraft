@@ -1,5 +1,4 @@
 # mini-minecraft-wemissadam
-mini-minecraft-wemissadam created by GitHub Classroom
 
 ![Minecraft](img/preview.png)
 

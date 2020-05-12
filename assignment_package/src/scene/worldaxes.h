@@ -1,5 +1,4 @@
 #pragma once
-
 #include "drawable.h"
 #include <glm_includes.h>
 

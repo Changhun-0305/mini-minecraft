@@ -19,10 +19,6 @@ void BlockTypeWorker::createChunksInTerrain() {
      int x = toCoords(coord).x;
      int z = toCoords(coord).y;
 
-//     if (mp_terrain->hasChunkAt(x, z)) {
-//         return;
-//     }
-
      // fill chunk with block
      for (int i = x; i < x + 64; i++) {
          for (int j = z; j < z + 64; j++) {

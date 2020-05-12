@@ -9,6 +9,7 @@ River::River(Terrain *m_terrain, int terrainx, int terrainz) :
     }
 }
 
+// expands grammer string representing grammer shape
 void River::expand() {
     std::string temp = "";
     for (int i = 0; i < grammer.length(); i++) {
@@ -30,7 +31,7 @@ void River::expand() {
 }
 
 
-
+// moves the Turtle object forward and draws a curve of water blocks
 void River::goForward() {
     int riverLength = std::max((int) length * depth, 12);
     float newx, newz;
@@ -38,14 +39,12 @@ void River::goForward() {
     double random = ((double) rand() / (RAND_MAX));
     if (random > 0.5) random = 1;
     else random = -1;
+
     for (int i = 0; i < riverLength; i++) {
         float step = i * 2 * PI / riverLength;
         float offset = random * sin(step) * depth;
         newx = currTurtle->posx + offset;
         newz = currTurtle->posz + i;
-
-
-
         rotatedx = int(cos(currTurtle->orientation) * (newx - currTurtle->posx) - sin(currTurtle->orientation) *
                 (newz - currTurtle->posz) + currTurtle->posx);
         rotatedz = int(sin(currTurtle->orientation) * (newx - currTurtle->posx) + cos(currTurtle->orientation) *
@@ -59,6 +58,7 @@ void River::goForward() {
     
 }
 
+// expands the river width by coloring neighbor blocks
 void River::colorNeighbors(int x, int z, int radius, int depth) {
     for (int i = -radius; i <= radius; i++) { //x
         for (int k = -radius; k <= radius; k++) { //z
@@ -104,6 +104,7 @@ void River::colorNeighbors(int x, int z, int radius, int depth) {
     }
 }
 
+// draws a river based on l-systems
 void River::draw() {
     Turtle t = Turtle(32, 1, 0);
     turtles.push(t);
@@ -140,7 +141,6 @@ void River::draw() {
         }
         case '-':
         {
-            //currTurtle->depth++;
             float randNum = 30 + rand() % (60 - 40 + 1);
             currTurtle->orientation -= randNum * PI / 180.f;
             break;

@@ -8,10 +8,10 @@ Cave::Cave(Terrain* m_terrain, int posx, int posz) :
     currpos = glm::vec3(startx, 128, startz);
 }
 
+// carve the opening of a cave by making existing blocks empty
 void Cave::carveOpening() {
     for (int i = -radius; i <= radius; i++) { //x
         for (int k = -radius; k <= radius; k++) { //z
-
             if (i * i + k * k < radius * radius &&
                     m_terrain->hasChunkAt(currpos.x + i, currpos.z + k)) {
                 for (int m = 118; m < 255; m++) {
@@ -24,12 +24,10 @@ void Cave::carveOpening() {
     draw();
 }
 
+// carve a sphere around a center point with random ores
 void Cave::carveSphere() {
-//  m_terrain->setBlockAt(currpos.x, currpos.y, currpos.z, EMPTY);
-
     for (int i = -radius; i <= radius; i++) { //x
         for (int k = -radius; k <= radius; k++) { //z
-
             if (m_terrain->hasChunkAt(currpos.x + i, currpos.z + k)) {
                 for (int j = -radius; j < radius; j++) {
                     if (i * i + k * k + j * j < radius * radius) {
@@ -48,7 +46,6 @@ void Cave::carveSphere() {
                                 } else {
                                     m_terrain->setBlockAt(currpos.x + i, currpos.y + j, currpos.z + k, GOLD);
                                 }
-
                             }
                     }
                 }
@@ -58,10 +55,10 @@ void Cave::carveSphere() {
 
 }
 
+// make a lava pool at the bottom of cave
 void Cave::drawLava() {
     for (int i = -radius; i <= radius; i++) { //x
         for (int k = -radius; k <= radius; k++) { //z
-
             if (m_terrain->hasChunkAt(currpos.x + i, currpos.z + k)) {
                 for (int j = -radius; j < radius; j++) {
                     if (i * i + k * k + j * j < radius * radius && j < -radius + 2) {
@@ -73,6 +70,7 @@ void Cave::drawLava() {
     }
 }
 
+// draws a cave with at most 100 iterations of carving 
 void Cave::draw() {
     for (int i = 0; i < 100; i++) {
         float perlin = perlinNoise3D(currpos / 5.f);
@@ -103,6 +101,7 @@ void Cave::draw() {
     return;
 }
 
+// perlin noise
 float Cave::perlinNoise3D(glm::vec3 p) {
     float surfletSum = 0.f;
     // Iterate over the four integer corners surrounding uv
@@ -117,6 +116,7 @@ float Cave::perlinNoise3D(glm::vec3 p) {
 
 }
 
+// returns a random vector 
 glm::vec3 Cave::random3(glm::vec3 p) {
     return glm::fract(glm::sin(glm::vec3(glm::dot(p, glm::vec3(127.1, 311.7, 200.0)),
                           glm::dot(p, glm::vec3(269.5, 183.3, 212.9)) * 43758.5453f,
