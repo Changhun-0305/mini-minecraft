@@ -11,11 +11,6 @@ VBOWorker::VBOWorker(Terrain *terrain,
 {
 }
 void VBOWorker::run() {
-//    std::vector<glm::vec4> pos;
-//    std::vector<glm::vec4> col;
-//    std::vector<glm::vec4> nor;
-//    std::vector<GLuint> idx;
-//    mp_chunk->createVBO(&pos, &col, &nor, &idx);
     std::vector<glm::vec4> posOpq;
     std::vector<glm::vec4> norOpq;
     std::vector<glm::vec2> uvOpq;

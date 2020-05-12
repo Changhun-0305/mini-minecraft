@@ -58,10 +58,7 @@ public:
     //Chunk();
     Chunk(OpenGLContext*);
     void virtual create();
-//    void createVBO(std::vector<glm::vec4>* pos,
-//                   std::vector<glm::vec4>* col,
-//                   std::vector<glm::vec4>* nor,
-//                   std::vector<GLuint>* idx);
+
     void createVBO(
             std::vector<glm::vec4>* posOpq,
             std::vector<glm::vec4>* norOpq,

@@ -42,12 +42,6 @@ void Player::processInputs(InputBundle &inputs) {
     }
     // the player is not in flight mode (i.e. collision & gravity should be applied)
     else {
-//        if (inputs.isOnGround) {
-//            m_velocity = glm::vec3();
-//            m_acceleration = glm::vec3();
-//        }
-//        m_velocity = glm::vec3();
-//        m_acceleration = glm::vec3();
 
         if (inputs.wPressed) {
 
@@ -71,12 +65,7 @@ void Player::processInputs(InputBundle &inputs) {
             m_acceleration = glm::vec3();
         }
 
-//        if (inputs.isOnGround) {
-//            m_acceleration[1] = 0.f;
-//            m_velocity[1] = 0.f;
-//        }
         if (inputs.spacePressed && inputs.isOnGround) {
-            //inputs.spacePressed = false;
             std::cout<< "jump" << std::endl;
             m_velocity = accRate * this->m_up;
         }
@@ -89,7 +78,6 @@ void Player::computePhysics(float dT, const Terrain &terrain, InputBundle &input
 
     m_velocity = m_velocity * 0.90f + dT * m_acceleration;
     glm::vec3 rayDirection = m_velocity * dT;
-    //glm::vec3 displacement = glm::vec3();
     glm::vec3 gravity = glm::vec3(0.0f, -10.0f, 0.0f);
 
 
@@ -119,7 +107,6 @@ void Player::setCameraWidthHeight(unsigned int w, unsigned int h) {
 
 void Player::detectCollision(glm::vec3 *rayDirection, const Terrain &terrain) {
     glm::vec3 bottomLeftVertex = this->m_position - glm::vec3(0.5f, 0.f, 0.5f);
-    //glm::vec3 rayOrigin = this->m_position;
     glm::ivec3 out_blockHit = glm::ivec3();
     float out_dist = 0.f;
 
@@ -209,7 +196,6 @@ bool Player::isOnGroundLevel(const Terrain &terrain, InputBundle &input) {
 
                 input.isOnGround = true;
                 if (!input.spacePressed) {
-//                    std::cout<<"settozero"<<std::endl;
                     m_acceleration[1] = 0.f;
                     m_velocity[1] = 0.f;
                 }
@@ -232,13 +218,11 @@ bool Player::isInWater(const Terrain &terrain, InputBundle &input) {
                                    floor(bottomLeftVertex[2]) + z) != WATER) {
 
                 input.isInWater = false;
-                //footstep = new QSound(":/sound/footsteps-grass.wav");
                 return false;
             }
         }
     }
     input.isInWater = true;
-    //footstep = new QSound(":/sound/swimming.wav");
     return false;
 }
 
@@ -253,7 +237,6 @@ void Player::destroyBlock(Terrain *terrain) {
         std::cout << "destroy this!" << std::endl;
         terrain->setBlockAt(out_blockHit.x, out_blockHit.y, out_blockHit.z, EMPTY);
         terrain->getChunkAt(out_blockHit.x, out_blockHit.z).get()->destroy();
-        //terrain->getChunkAt(out_blockHit.x, out_blockHit.z).get()->create();
     }
 }
 

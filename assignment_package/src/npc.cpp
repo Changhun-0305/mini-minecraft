@@ -59,7 +59,6 @@ void NPC::assigneDirection(int direction) {
 
 void NPC::detectCollision(glm::vec3 *rayDirection, const Terrain &terrain) {
       glm::vec3 bottomLeftVertex = this->m_position - glm::vec3(0.5f, 0.f, 0.5f);
-      //glm::vec3 rayOrigin = this->m_m_position;
       glm::ivec3 out_blockHit = glm::ivec3();
       float out_dist = 0.f;
 
@@ -71,7 +70,6 @@ void NPC::detectCollision(glm::vec3 *rayDirection, const Terrain &terrain) {
 
                   }
                   if (gridMarch(rayOrigin, *rayDirection, terrain, &out_dist, &out_blockHit)) {
-                      //*rayDirection = (out_dist - 0.005f) * glm::normalize(*rayDirection);
                       float distance = glm::min(out_dist - 0.005f, glm::abs(glm::length(this->m_position - glm::vec3(out_blockHit))));
                       *rayDirection = distance * glm::normalize(*rayDirection);
                   }
@@ -186,10 +184,6 @@ void NPC::createTestVBO(std::vector<GLuint> *idx,
     }
     m_count_npc_opq = idx->size();
 
-//    pos_nor_uv->clear();
-//    pos_nor_uv->push_back(glm::vec4(m_position.x - 0.5f, m_position.y, m_position.z - 0.5f, 1));
-//    pos_nor_uv->push_back(glm::vec4(0, 0, 1, 0));
-//    pos_nor_uv->push_back(glm::vec())
     pos->clear();
     nor->clear();
     uv->clear();

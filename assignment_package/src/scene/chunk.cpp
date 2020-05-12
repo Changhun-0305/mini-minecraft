@@ -2,12 +2,6 @@
 #include "src/drawable.h"
 #include "iostream"
 
-
-//Chunk::Chunk() :m_blocks(), m_neighbors{{XPOS, nullptr}, {XNEG, nullptr}, {ZPOS, nullptr}, {ZNEG, nullptr}}
-//{
-//    std::fill_n(m_blocks.begin(), 65536, EMPTY);
-//}
-
 Chunk::Chunk(OpenGLContext* context) : Drawable(context), m_blocks(), m_neighbors{{XPOS, nullptr}, {XNEG, nullptr}, {ZPOS, nullptr}, {ZNEG, nullptr}}
 {
     std::fill_n(m_blocks.begin(), 65536, EMPTY);
